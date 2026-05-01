@@ -1,0 +1,12 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ocm-managed-serviceaccount-replicaset-controller-leader-election
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: Role
+  name: ocm-managed-serviceaccount-replicaset-controller-leader-election
+subjects:
+  - kind: ServiceAccount
+    name: ocm-managed-serviceaccount-replicaset-controller
+    namespace: ocm-managed-serviceaccount-replicaset-controller-system

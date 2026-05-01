@@ -1,0 +1,5 @@
+The OCM ManagedServiceAccount ReplicaSet Controller chart installed the manager,
+controller RBAC, and the ManagedServiceAccountReplicaSet API.
+
+Create ManagedServiceAccountReplicaSet resources to generate per-cluster OCM
+ManagedServiceAccount and optional RBAC ManifestWork children at runtime.

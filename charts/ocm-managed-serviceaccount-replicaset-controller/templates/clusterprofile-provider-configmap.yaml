@@ -1,0 +1,24 @@
+{{- if .Values.controller.clusterProfileProvider.enabled }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "msars.fullname" . }}-clusterprofile-provider
+  namespace: {{ include "msars.namespace" . }}
+  labels:
+    {{- include "msars.labels" . | nindent 4 }}
+data:
+  {{ base .Values.controller.clusterProfileProvider.providerFilePath }}: |
+    {
+      "providers": [
+        {
+          "name": {{ .Values.controller.clusterProfileProvider.providerName | quote }},
+          "execConfig": {
+            "apiVersion": "client.authentication.k8s.io/v1",
+            "command": {{ .Values.controller.clusterProfileProvider.credentialsCommand | quote }},
+            "provideClusterInfo": true,
+            "interactiveMode": "Never"
+          }
+        }
+      ]
+    }
+{{- end }}

@@ -1,0 +1,8 @@
+domain: appthrust.io
+layout:
+- go.kubebuilder.io/v4
+projectName: ocm-managed-serviceaccount-replicaset-controller
+repo: github.com/appthrust/ocm-managed-serviceaccount-replicaset-controller
+resources: []
+version: "3"
+

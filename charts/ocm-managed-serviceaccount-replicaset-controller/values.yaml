@@ -1,0 +1,127 @@
+global:
+  imageRegistry: ""
+  imagePullSecrets: []
+
+nameOverride: ""
+fullnameOverride: ""
+namespaceOverride: ""
+commonLabels: {}
+commonAnnotations: {}
+
+image:
+  registry: ghcr.io
+  repository: appthrust/ocm-managed-serviceaccount-replicaset-controller
+  tag: "0.1.0"
+  digest: ""
+  pullPolicy: IfNotPresent
+  pullSecrets: []
+
+replicaCount: 1
+revisionHistoryLimit: 10
+
+controller:
+  leaderElection:
+    enabled: true
+  extraArgs: []
+  clusterProfileProvider:
+    enabled: false
+    providerFilePath: /etc/msars/clusterprofile-provider-file.json
+    providerName: open-cluster-management
+    credentialsCommand: /cp-creds
+
+serviceAccount:
+  create: true
+  name: ""
+  annotations: {}
+  labels: {}
+
+rbac:
+  annotations: {}
+
+metrics:
+  containerPort: 8080
+  service:
+    enabled: false
+    type: ClusterIP
+    port: 8080
+    annotations: {}
+
+serviceMonitor:
+  enabled: false
+  namespace: ""
+  labels: {}
+  annotations: {}
+  interval: 30s
+  scrapeTimeout: 10s
+  path: /metrics
+  scheme: https
+  bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
+  tlsConfig:
+    insecureSkipVerify: true
+  honorLabels: false
+
+containerPorts:
+  health: 8081
+
+livenessProbe:
+  initialDelaySeconds: 15
+  periodSeconds: 20
+  timeoutSeconds: 1
+  failureThreshold: 3
+  successThreshold: 1
+
+readinessProbe:
+  initialDelaySeconds: 5
+  periodSeconds: 10
+  timeoutSeconds: 1
+  failureThreshold: 3
+  successThreshold: 1
+
+resources:
+  requests:
+    cpu: 50m
+    memory: 64Mi
+  limits:
+    memory: 128Mi
+
+podSecurityContext:
+  enabled: true
+  fsGroup: 65532
+  runAsNonRoot: true
+  seccompProfile:
+    type: RuntimeDefault
+
+containerSecurityContext:
+  enabled: true
+  allowPrivilegeEscalation: false
+  capabilities:
+    drop:
+      - ALL
+  readOnlyRootFilesystem: true
+  runAsGroup: 65532
+  runAsNonRoot: true
+  runAsUser: 65532
+
+podLabels: {}
+podAnnotations: {}
+podAutomountServiceAccountToken: true
+deploymentAnnotations: {}
+priorityClassName: ""
+schedulerName: ""
+# Match controller-runtime's defaultGracefulShutdownPeriod (30s) so kubelet
+# does not SIGKILL the manager mid-shutdown before runnables drain and the
+# leader-election lease is released.
+terminationGracePeriodSeconds: 30
+
+nodeSelector: {}
+tolerations: []
+affinity: {}
+topologySpreadConstraints: []
+
+extraEnvVars: []
+extraEnvVarsCM: ""
+extraEnvVarsSecret: ""
+extraVolumeMounts: []
+extraVolumes: []
+initContainers: []
+sidecars: []

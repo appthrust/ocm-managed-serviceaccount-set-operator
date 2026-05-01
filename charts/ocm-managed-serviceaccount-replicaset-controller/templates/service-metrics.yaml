@@ -1,0 +1,22 @@
+{{- if .Values.metrics.service.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "msars.metricsServiceName" . }}
+  namespace: {{ include "msars.namespace" . }}
+  labels:
+    {{- include "msars.labels" . | nindent 4 }}
+  {{- with merge .Values.metrics.service.annotations .Values.commonAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.metrics.service.type }}
+  selector:
+    {{- include "msars.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: metrics
+      port: {{ .Values.metrics.service.port }}
+      targetPort: metrics
+      protocol: TCP
+{{- end }}

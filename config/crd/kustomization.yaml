@@ -1,0 +1,2 @@
+resources:
+  - bases/authentication.appthrust.io_managedserviceaccountreplicasets.yaml

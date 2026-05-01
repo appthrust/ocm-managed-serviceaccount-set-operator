@@ -1,0 +1,13 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: ocm-managed-serviceaccount-replicaset-controller
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: ocm-managed-serviceaccount-replicaset-controller
+subjects:
+  - kind: ServiceAccount
+    name: ocm-managed-serviceaccount-replicaset-controller
+    namespace: ocm-managed-serviceaccount-replicaset-controller-system
+
