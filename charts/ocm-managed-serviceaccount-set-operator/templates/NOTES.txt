@@ -1,0 +1,4 @@
+The OCM ManagedServiceAccount Set Operator chart installed the manager
+scaffold. Controller APIs are described in plan.md and will be added during
+implementation.
+

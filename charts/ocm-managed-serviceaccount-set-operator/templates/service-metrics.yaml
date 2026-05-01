@@ -1,0 +1,23 @@
+{{- if .Values.metrics.service.enabled -}}
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "omsa.fullname" . }}-metrics
+  namespace: {{ include "omsa.namespace" . }}
+  labels:
+    {{- include "omsa.labels" . | nindent 4 }}
+  {{- with merge .Values.metrics.service.annotations .Values.commonAnnotations }}
+  annotations:
+    {{- toYaml . | nindent 4 }}
+  {{- end }}
+spec:
+  type: {{ .Values.metrics.service.type }}
+  selector:
+    {{- include "omsa.selectorLabels" . | nindent 4 }}
+  ports:
+    - name: metrics
+      port: {{ .Values.metrics.service.port }}
+      targetPort: metrics
+      protocol: TCP
+{{- end }}
+

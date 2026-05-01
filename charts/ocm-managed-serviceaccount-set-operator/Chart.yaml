@@ -1,0 +1,18 @@
+apiVersion: v2
+name: ocm-managed-serviceaccount-set-operator
+description: Helm chart for the OCM ManagedServiceAccount Set Operator
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
+kubeVersion: ">=1.29.0-0"
+home: https://github.com/appthrust/ocm-managed-serviceaccount-set-operator
+sources:
+  - https://github.com/appthrust/ocm-managed-serviceaccount-set-operator
+keywords:
+  - ocm
+  - managedserviceaccount
+  - multicluster
+  - operator
+maintainers:
+  - name: appthrust
+

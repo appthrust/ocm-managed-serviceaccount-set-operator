@@ -1,0 +1,3 @@
+resources:
+  - bases/authentication.appthrust.io_managedserviceaccountsets.yaml
+

@@ -1,0 +1,26 @@
+namespaceOverride: omsa-system
+image:
+  tag: test
+operator:
+  leaderElection:
+    enabled: false
+  extraArgs:
+    - --zap-log-level=debug
+commonAnnotations:
+  appthrust.io/common: "true"
+podAnnotations:
+  appthrust.io/pod: "true"
+podLabels:
+  appthrust.io/test: "true"
+metrics:
+  service:
+    enabled: true
+    annotations:
+      appthrust.io/metrics: "true"
+serviceMonitor:
+  enabled: true
+  labels:
+    appthrust.io/monitor: "true"
+extraEnvVars:
+  - name: OMSA_TEST_MODE
+    value: "true"

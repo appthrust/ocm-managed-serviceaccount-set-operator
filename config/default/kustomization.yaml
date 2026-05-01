@@ -1,0 +1,8 @@
+namespace: ocm-managed-serviceaccount-set-operator-system
+
+resources:
+  - namespace.yaml
+  - ../crd
+  - ../rbac
+  - ../manager
+
